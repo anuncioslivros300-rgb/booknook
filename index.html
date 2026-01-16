@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookNook | Physical Books & Ebooks Store</title>
+    <meta name="description" content="Discover your next favorite book at BookNook. Shop physical books and ebooks with free shipping on orders over $35.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1e40af",
+                        secondary: "#0f766e",
+                        accent: "#f59e0b",
+                        light: "#f8fafc",
+                        dark: "#1e293b"
+                    },
+                    fontFamily: {
+                        'serif': ['Merriweather', 'serif'],
+                        'sans': ['Open Sans', 'sans-serif']
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .format-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+        .price-strike {
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-light font-sans text-dark">
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2 text-2xl font-bold text-primary">
+                        <i class="fas fa-book-open text-accent"></i>
+                        <span>BookNook</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary font-medium transition-colors">Home</a>
+                    <a href="#physical-books" class="text-gray-700 hover:text-primary font-medium transition-colors">Physical Books</a>
+                    <a href="#ebooks" class="text-gray-700 hover:text-primary font-medium transition-colors">Ebooks</a>
+                    <a href="#bestsellers" class="text-gray-700 hover:text-primary font-medium transition-colors">Bestsellers</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary font-medium transition-colors">About</a>
+                </nav>
+
+                <!-- User Actions -->
+                <div class="flex items-center space-x-6">
+                    <button class="text-gray-700 hover:text-primary">
+                        <i class="fas fa-search text-lg"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-primary relative">
+                        <i class="fas fa-user text-lg"></i>
+                    </button>
+                    <button class="text-gray-700 hover:text-primary relative">
+                        <i class="fas fa-shopping-cart text-lg"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="md:hidden py-4 border-t border-gray-200 hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-gray-700 hover:text-primary font-medium">Home</a>
+                    <a href="#physical-books" class="text-gray-700 hover:text-primary font-medium">Physical Books</a>
+                    <a href="#ebooks" class="text-gray-700 hover:text-primary font-medium">Ebooks</a>
+                    <a href="#bestsellers" class="text-gray-700 hover:text-primary font-medium">Bestsellers</a>
+                    <a href="#about" class="text-gray-700 hover:text-primary font-medium">About</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="bg-gradient-to-r from-primary to-secondary text-white py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl">
+                    <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6">Discover Your Next Favorite Book</h1>
+                    <p class="text-xl mb-8 opacity-90">Explore our curated collection of physical books and ebooks. Enjoy free shipping on orders over $35 and instant ebook delivery.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#physical-books" class="bg-accent hover:bg-yellow-500 text-white font-bold py-3 px-8 rounded-lg text-center transition-colors">Shop Physical Books</a>
+                        <a href="#ebooks" class="bg-transparent hover:bg-blue-900 border-2 border-white text-white font-bold py-3 px-8 rounded-lg text-center transition-colors">Browse Ebooks</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-serif font-bold text-center mb-12">Shop By Format</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/3 mb-6 md:mb-0">
+                                <div class="w-40 h-40 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-book text-6xl text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="md:w-2/3 md:pl-8">
+                                <h3 class="text-2xl font-bold text-primary mb-4">Physical Books</h3>
+                                <p class="text-gray-600 mb-6">Enjoy the feel of real paper, beautiful covers, and collectible editions. Free shipping on orders over $35.</p>
+                                <a href="#physical-books" class="inline-block bg-primary hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg transition-colors">Browse Collection</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="md:w-1/3 mb-6 md:mb-0">
+                                <div class="w-40 h-40 bg-teal-100 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="fas fa-tablet-alt text-6xl text-secondary"></i>
+                                </div>
+                            </div>
+                            <div class="md:w-2/3 md:pl-8">
+                                <h3 class="text-2xl font-bold text-secondary mb-4">Ebooks</h3>
+                                <p class="text-gray-600 mb-6">Instant delivery, adjustable text size, and read anywhere. Compatible with all major devices and apps.</p>
+                                <a href="#ebooks" class="inline-block bg-secondary hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-colors">Browse Ebooks</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Physical Books Section -->
+        <section id="physical-books" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-primary">Physical Books</h2>
+                        <p class="text-gray-600 mt-2">Hardcover, paperback, and special editions</p>
+                    </div>
+                    <a href="#" class="text-primary hover:text-blue-800 font-bold flex items-center">
+                        View All <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="physical-books-container">
+                    <!-- Physical books will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Ebooks Section -->
+        <section id="ebooks" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center mb-10">
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-secondary">Ebooks</h2>
+                        <p class="text-gray-600 mt-2">Instant delivery, read on any device</p>
+                    </div>
+                    <a href="#" class="text-secondary hover:text-teal-700 font-bold flex items-center">
+                        View All <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="ebooks-container">
+                    <!-- Ebooks will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Bestsellers Section -->
+        <section id="bestsellers" class="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-serif font-bold text-center mb-12">Bestsellers</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Bestseller 1 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="relative">
+                            <img src="https://picsum.photos/600/400?random=10" alt="Bestseller book cover: The Midnight Library" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="format-badge">
+                                <span class="bg-primary text-white text-xs font-bold py-1 px-3 rounded-full">BOTH FORMATS</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">The Midnight Library</h3>
+                            <p class="text-gray-600 mb-4">By Matt Haig</p>
+                            <p class="text-gray-700 mb-6">A novel about all the choices that go into a life well lived.</p>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-2xl font-bold text-primary">$24.99</span>
+                                    <span class="text-gray-500 ml-2">print</span>
+                                </div>
+                                <div>
+                                    <span class="text-lg font-bold text-secondary">$12.99</span>
+                                    <span class="text-gray-500 ml-2">ebook</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 flex space-x-3">
+                                <button class="flex-1 bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">Add Print</button>
+                                <button class="flex-1 bg-secondary hover:bg-teal-700 text-white font-bold py-3 rounded-lg transition-colors">Add Ebook</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bestseller 2 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="relative">
+                            <img src="https://picsum.photos/600/400?random=11" alt="Bestseller book cover: Project Hail Mary" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="format-badge">
+                                <span class="bg-primary text-white text-xs font-bold py-1 px-3 rounded-full">PRINT</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Project Hail Mary</h3>
+                            <p class="text-gray-600 mb-4">By Andy Weir</p>
+                            <p class="text-gray-700 mb-6">A lone astronaut must save the earth from disaster in this high-stakes sci-fi thriller.</p>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-2xl font-bold text-primary">$28.99</span>
+                                    <span class="text-gray-500 ml-2">hardcover</span>
+                                </div>
+                                <div class="text-gray-400">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="ml-1">Ebook coming soon</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-6 bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <!-- Bestseller 3 -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="relative">
+                            <img src="https://picsum.photos/600/400?random=12" alt="Bestseller book cover: Klara and the Sun" class="w-full h-64 object-cover" loading="lazy">
+                            <div class="format-badge">
+                                <span class="bg-secondary text-white text-xs font-bold py-1 px-3 rounded-full">EBOOK</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Klara and the Sun</h3>
+                            <p class="text-gray-600 mb-4">By Kazuo Ishiguro</p>
+                            <p class="text-gray-700 mb-6">A magnificent new novel from the Nobel laureate about the changing nature of love.</p>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <span class="text-2xl font-bold text-secondary">$14.99</span>
+                                    <span class="text-gray-500 ml-2">ebook</span>
+                                </div>
+                                <div class="text-gray-400">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span class="ml-1">Print sold out</span>
+                                </div>
+                            </div>
+                            <button class="w-full mt-6 bg-secondary hover:bg-teal-700 text-white font-bold py-3 rounded-lg transition-colors">Buy Ebook Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="py-16 bg-primary text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-serif font-bold mb-6">Stay Updated</h2>
+                    <p class="text-xl mb-8 opacity-90">Subscribe to our newsletter for new releases, exclusive deals, and reading recommendations.</p>
+                    <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                        <input type="email" placeholder="Your email address" class="flex-grow px-6 py-4 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-accent">
+                        <button type="submit" class="bg-accent hover:bg-yellow-500 text-white font-bold py-4 px-8 rounded-lg transition-colors">Subscribe</button>
+                    </form>
+                    <p class="text-sm mt-4 opacity-75">By subscribing, you agree to our Privacy Policy and consent to receive updates from BookNook.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 text-2xl font-bold mb-6">
+                        <i class="fas fa-book-open text-accent"></i>
+                        <span>BookNook</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">Your trusted source for physical books and ebooks since 2010. We're passionate about connecting readers with great stories.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-goodreads text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#physical-books" class="text-gray-300 hover:text-white transition-colors">Physical Books</a></li>
+                        <li><a href="#ebooks" class="text-gray-300 hover:text-white transition-colors">Ebooks</a></li>
+                        <li><a href="#bestsellers" class="text-gray-300 hover:text-white transition-colors">Bestsellers</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Customer Service</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Shipping Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Returns & Exchanges</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contact Info</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-accent mt-1 mr-3"></i>
+                            <span class="text-gray-300">123 Book Street, Literary City, LC 10001</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone text-accent mr-3"></i>
+                            <span class="text-gray-300">(555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-accent mr-3"></i>
+                            <span class="text-gray-300">hello@booknook.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-accent mr-3"></i>
+                            <span class="text-gray-300">Mon-Fri: 9am-6pm EST</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 BookNook. All rights reserved. | Designed with <i class="fas fa-heart text-red-500"></i> for book lovers everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Define data at the beginning
+        const physicalBooks = [
+            {
+                "id": 1,
+                "title": "The Silent Patient",
+                "author": "Alex Michaelides",
+                "price": 26.99,
+                "originalPrice": 32.99,
+                "format": "Hardcover",
+                "rating": 4.5,
+                "imageId": 1
+            },
+            {
+                "id": 2,
+                "title": "Where the Crawdads Sing",
+                "author": "Delia Owens",
+                "price": 18.99,
+                "originalPrice": null,
+                "format": "Paperback",
+                "rating": 4.7,
+                "imageId": 2
+            },
+            {
+                "id": 3,
+                "title": "The Seven Husbands of Evelyn Hugo",
+                "author": "Taylor Jenkins Reid",
+                "price": 16.99,
+                "originalPrice": 22.99,
+                "format": "Paperback",
+                "rating": 4.6,
+                "imageId": 3
+            },
+            {
+                "id": 4,
+                "title": "Dune",
+                "author": "Frank Herbert",
+                "price": 34.99,
+                "originalPrice": null,
+                "format": "Special Edition",
+                "rating": 4.8,
+                "imageId": 4
+            }
+        ];
+
+        const ebooks = [
+            {
+                "id": 5,
+                "title": "Atomic Habits",
+                "author": "James Clear",
+                "price": 13.99,
+                "originalPrice": 16.99,
+                "format": "Ebook",
+                "rating": 4.8,
+                "imageId": 5
+            },
+            {
+                "id": 6,
+                "title": "The Invisible Life of Addie LaRue",
+                "author": "V.E. Schwab",
+                "price": 11.99,
+                "originalPrice": null,
+                "format": "Ebook",
+                "rating": 4.4,
+                "imageId": 6
+            },
+            {
+                "id": 7,
+                "title": "Educated",
+                "author": "Tara Westover",
+                "price": 14.99,
+                "originalPrice": 18.99,
+                "format": "Ebook",
+                "rating": 4.7,
+                "imageId": 7
+            },
+            {
+                "id": 8,
+                "title": "The Midnight Library",
+                "author": "Matt Haig",
+                "price": 12.99,
+                "originalPrice": null,
+                "format": "Ebook",
+                "rating": 4.5,
+                "imageId": 8
+            }
+        ];
+
+        // Function to generate star rating HTML
+        function generateStarRating(rating) {
+            let stars = "";
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star text-yellow-500"></i>';
+            }
+            
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt text-yellow-500"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star text-yellow-500"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Function to create a book card
+        function createBookCard(book, isPhysical = true) {
+            const formatColor = isPhysical ? "primary" : "secondary";
+            const formatText = isPhysical ? "Physical" : "Ebook";
+            
+            return `
+                <div class="book-card bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300">
+                    <div class="relative">
+                        <img src="https://picsum.photos/400/500?random=${book.imageId}" 
+                             alt="Book cover: ${book.title} by ${book.author}" 
+                             class="w-full h-64 object-cover"
+                             loading="lazy">
+                        <div class="format-badge">
+                            <span class="bg-${formatColor} text-white text-xs font-bold py-1 px-3 rounded-full">${formatText.toUpperCase()}</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 line-clamp-1">${book.title}</h3>
+                        <p class="text-gray-600 mb-3">By ${book.author}</p>
+                        <div class="flex items-center mb-4">
+                            <div class="mr-2">
+                                ${generateStarRating(book.rating)}
+                            </div>
+                            <span class="text-gray-500 text-sm">${book.rating}</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span class="text-2xl font-bold text-${formatColor}">$${book.price.toFixed(2)}</span>
+                                ${book.originalPrice ? 
+                                    `<span class="price-strike text-gray-500 ml-2">$${book.originalPrice.toFixed(2)}</span>` 
+                                    : ""}
+                            </div>
+                            <span class="text-gray-500 text-sm">${book.format}</span>
+                        </div>
+                        <button class="w-full bg-${formatColor} hover:bg-${formatColor === "primary" ? "blue-800" : "teal-700"} text-white font-bold py-3 rounded-lg transition-colors add-to-cart" data-id="${book.id}" data-format="${formatText.toLowerCase()}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to render books
+        function renderBooks() {
+            const physicalContainer = document.getElementById("physical-books-container");
+            const ebookContainer = document.getElementById("ebooks-container");
+            
+            if (physicalContainer) {
+                physicalContainer.innerHTML = physicalBooks.map(book => createBookCard(book, true)).join("");
+            }
+            
+            if (ebookContainer) {
+                ebookContainer.innerHTML = ebooks.map(book => createBookCard(book, false)).join("");
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            renderBooks();
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector("button.md\\:hidden");
+            const mobileMenu = document.getElementById("mobile-menu");
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener("click", function() {
+                    mobileMenu.classList.toggle("hidden");
+                });
+            }
+            
+            // Add to cart functionality
+            document.addEventListener("click", function(e) {
+                if (e.target.classList.contains("add-to-cart")) {
+                    const button = e.target;
+                    const id = button.getAttribute("data-id");
+                    const format = button.getAttribute("data-format");
+                    
+                    // Find the book
+                    const allBooks = [...physicalBooks, ...ebooks];
+                    const book = allBooks.find(b => b.id == id);
+                    
+                    if (book) {
+                        // Show feedback
+                        const originalText = button.textContent;
+                        button.textContent = "Added!";
+                        button.classList.add("bg-green-600");
+                        button.classList.remove(`bg-${format === "physical" ? "primary" : "secondary"}`);
+                        
+                        // Reset after 2 seconds
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.classList.remove("bg-green-600");
+                            button.classList.add(`bg-${format === "physical" ? "primary" : "secondary"}`);
+                        }, 2000);
+                        
+                        // In a real app, you would add to cart here
+                        console.log(`Added to cart: ${book.title} (${format})`);
+                    }
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute("href");
+                    if (targetId === "#") return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: "smooth"
+                        });
+                        
+                        // Close mobile menu if open
+                        if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+                            mobileMenu.classList.add("hidden");
+                        }
+                    }
+                });
+            });
+            
+            // Newsletter form submission
+            const newsletterForm = document.querySelector("form");
+            if (newsletterForm) {
+                newsletterForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector("input[type='email']");
+                    if (emailInput && emailInput.value) {
+                        // Show success message
+                        const button = this.querySelector("button");
+                        const originalText = button.textContent;
+                        button.textContent = "Subscribed!";
+                        button.classList.remove("bg-accent", "hover:bg-yellow-500");
+                        button.classList.add("bg-green-600");
+                        
+                        // Reset form
+                        emailInput.value = "";
+                        
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.classList.remove("bg-green-600");
+                            button.classList.add("bg-accent", "hover:bg-yellow-500");
+                        }, 3000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
